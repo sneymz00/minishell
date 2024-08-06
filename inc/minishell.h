@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:30:01 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/06 20:42:42 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/06 23:13:56 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,15 @@ typedef struct s_shell
 }			t_shell;
 
 /***FUNTIONS***/
+int	check_doubles(char *str, char ltr);
+int	check_specials(char *str, char ltr);
+int	parssing(t_shell **shell);
 //void	prints(void);
 
 /***MAIN***/
 void	init_shell(t_shell **shell, char **env);
 void	clean_data(t_shell **shell);
+int		start_shell(t_shell	*shell);
 
 /****ERORR FOUND***/
 void	error_message(char *str);

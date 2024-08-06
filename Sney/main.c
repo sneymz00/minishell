@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:49:47 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/06 21:12:02 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/06 23:14:17 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,10 @@ int main(int ac, char **ag, char **env)
 		shell->prompt = readline(BLUE"/home/minishell$ "GBD);
 		if (!shell->prompt)
 			break;
-		printf("%s\n", shell->prompt);
+		if (start_shell(shell) != -1)
+			printf("Error with values\n");
 		if (!strncmp("exit", shell->prompt, 5))
-		{
-			free(shell->prompt);
 			break;
-		}
 		else
 			add_history(shell->prompt);
 		free(shell->prompt);

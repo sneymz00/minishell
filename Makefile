@@ -24,7 +24,8 @@ READLINE	=		-lreadline
 ###############################################################################
 
 SRC 		= 		$(SRC_DIR_SNY)main.c\
-					$(SRC_DIR_NAV)printfs.c\
+					$(SRC_DIR_SNY)parssing.c\
+					$(SRC_DIR_SNY)start_shell.c\
 
 
 ###############################################################################
@@ -48,11 +49,12 @@ $(NAME)::
 	@echo "Minishell is alived"
 
 $(OBJS)%.o: $(SRC_DIR_SNY)%.c Makefile $(INCLUDE)
-	@echo "Compiling $<"
+	@echo "Compiling..."
 	@mkdir -p $(OBJS)
 	@$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
+	@make -C $(LIBFT) fclean --no-print-directory
 	@echo "Cleaning up..."
 	@$(RM) $(OBJS)
 
@@ -61,7 +63,5 @@ fclean: clean
 	@$(RM) $(NAME)
 
 re: fclean all
-
-rebonus: fclean bonus
 
 .PHONY: all clean fclean re
