@@ -7,6 +7,8 @@ INCLUDE		=		inc/minishell.h
 OBJS		= 		obj/
 SRC_DIR_NAV	=		Navarro/
 SRC_DIR_SNY	=		Sney/
+LIBFT		=		Libreries/Libft
+LIBFT_A   =		Libreries/Libft/libft.a
 
 
 ###############################################################################
@@ -14,7 +16,8 @@ SRC_DIR_SNY	=		Sney/
 ###############################################################################
 
 CC 			= 		gcc
-CCFLAGS		= 		-g#-Wall -Wextra -Werror -fsanitize=address
+CCFLAGS		= 		-g #-fsanitize=address-Wall -Wextra -Werror -fsanitize=address
+READLINE	=		-lreadline
 
 ###############################################################################
 #									SRC    									  #
@@ -35,11 +38,12 @@ OBJ_DIR = $(patsubst $(SRC_DIR_SNY)%.c, $(OBJS)%.o, $(SRC))
 ###############################################################################
 
 all:
+	@make -C $(LIBFT) --no-print-directory
 	@make $(NAME) --no-print-directory
 
 $(NAME):: $(OBJ_DIR) $(LIBFT)
 	@echo "Compiling file"
-	@$(CC) $(CCFLAGS) $(OBJ_DIR) -o $(NAME)
+	@$(CC) $(CCFLAGS) $(OBJ_DIR) $(LIBFT_A) -o $(NAME) $(READLINE)
 $(NAME)::
 	@echo "Minishell is alived"
 
