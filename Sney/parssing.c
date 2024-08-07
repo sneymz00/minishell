@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:35:51 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/06 23:13:53 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:40:49 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,23 @@ int	check_doubles(char *str, char ltr)
 	}
 	if (counter % 2 == 0)
 		return (0);
-	return (1);
+	return (counter % 2);
 }
 
 int	check_specials(char *str, char ltr)
 {
 	int	i;
-	int counter;
 
 	i = 0;
-	counter = 0;
 	if (!str)
-		return (1);
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == ltr)
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	parssing(t_shell **shell)
@@ -55,11 +53,11 @@ int	parssing(t_shell **shell)
 	t_shell	*cmd;
 
 	cmd = *shell;
-	if (check_doubles(cmd->prompt, 42)) // ""
+	if (check_doubles(cmd->prompt, 34)) // ""
 		return (-1);
 	if (check_doubles(cmd->prompt, 39)) // ''
-		return (-1); //salir y liberar
-	if (check_specials(cmd->prompt, 47) || check_specials(cmd->prompt, 59))
 		return (-1);
+	//if (check_specials(cmd->prompt, 47) || check_specials(cmd->prompt, 59))//:/ Cambiar a caso especifico
+	//	return (-1);
 	return (0);
 }

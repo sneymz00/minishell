@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_shell.c                                      :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 22:48:04 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/07 17:57:25 by camurill         ###   ########.fr       */
+/*   Created: 2024/08/07 17:30:19 by camurill          #+#    #+#             */
+/*   Updated: 2024/08/07 17:32:25 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int start_shell(t_shell *shell)
+void	handle_signal(int signal)
 {
-	if (parssing(&shell) == -1) // redefinir los errores de entrada
-		return (-1);
-	return (0);
+	signal_received = 1;
 }

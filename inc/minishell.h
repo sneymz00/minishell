@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:30:01 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/06 23:13:56 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:50:29 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@
 # define BOLD_CYAN   "\033[1m\033[36m"
 # define BOLD_WHITE  "\033[1m\033[37m"
 
+extern volatile sig_atomic_t signal_received;
+
+typedef enum e_opcode
+{
+	CLOSE,
+	NO_CLOSE,
+	OPEN,
+}	t_opcode;
+
+
 typedef struct s_shell
 {
 	int		token;
@@ -56,9 +66,10 @@ typedef struct s_shell
 }			t_shell;
 
 /***FUNTIONS***/
-int	check_doubles(char *str, char ltr);
-int	check_specials(char *str, char ltr);
-int	parssing(t_shell **shell);
+int		check_doubles(char *str, char ltr);
+int		check_specials(char *str, char ltr);
+int		parssing(t_shell **shell);
+void	get_env(t_shell **shell, char **env);
 //void	prints(void);
 
 /***MAIN***/
@@ -67,6 +78,7 @@ void	clean_data(t_shell **shell);
 int		start_shell(t_shell	*shell);
 
 /****ERORR FOUND***/
-void	error_message(char *str);
+void	error_message(char *str, t_opcode OPCODE);
+void	free_matrix(char **matrix);
 
 #endif
