@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:30:01 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/08 00:24:13 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:41:02 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <curses.h> //tgetent-tputs
 # include <term.h> //tgoto-tgetent
 # include "../Libreries/Libft/libft.h"
+
+#define DELIM		 " \t\r\n\a"
 
 /***COLORS***/
 # define GBD	     "\033[0m"
@@ -55,6 +57,13 @@ typedef enum e_opcode
 	NO_CLOSE,
 	OPEN,
 }	t_opcode;
+
+typedef struct s_list 
+{
+	char	*path;
+	struct s_list	*next;
+	struct s_list	*prev;
+}			t_list;		
 
 
 typedef struct s_shell
