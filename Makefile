@@ -27,6 +27,8 @@ SRC 		= 		$(SRC_DIR_SNY)main.c\
 					$(SRC_DIR_SNY)parssing.c\
 					$(SRC_DIR_SNY)start_shell.c\
 					$(SRC_DIR_SNY)get_env.c\
+					$(SRC_DIR_SNY)signal.c\
+					$(SRC_DIR_SNY)built_ins.c\
 
 
 ###############################################################################

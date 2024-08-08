@@ -6,13 +6,46 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 17:30:19 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/07 17:32:25 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/08 00:00:46 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	handle_signal(int signal)
+void	handle_sigint(int signal)
 {
+	(void)signal;
 	signal_received = 1;
+	rl_on_new_line();
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+/*void	handle_sigquit(int signal)
+{
+	(void)signal;
+	signal_received = 1;
+	rl_on_new_line();
+	printf("\b\b  \b\b");
+	rl_replace_line("", 0);
+	rl_redisplay();
+}*/
+
+void check_signal(int signal_received)
+{
+	struct sigaction sigint;
+	struct sigaction sigout;
+
+	sigint.sa_handler = handle_sigint;
+	sigemptyset(&sigint.sa_mask);
+	sigint.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &sigint, NULL) == -1)
+		error_message("signation", CLOSE);
+	
+	sigout.sa_handler = SIG_IGN;
+	sigemptyset(&sigout.sa_mask);
+	sigint.sa_flags = SA_RESTART;
+	if (sigaction(SIGQUIT, &sigout, NULL) == -1)
+		error_message("signation", CLOSE);
 }

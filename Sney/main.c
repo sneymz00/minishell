@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:49:47 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/07 17:50:52 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/08 01:10:26 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_shell(t_shell **shell, char **env)
 	(* shell)->prompt = NULL;
 	(* shell)->token = 0;
 	(* shell)->status = 0;
+	(* shell)->arg = NULL;
 	(* shell)->env = NULL;
 	get_env(shell, env);//toDo funtion clean malloc **
 }
@@ -44,6 +45,8 @@ void	clean_data(t_shell **shell)
 	}
 	if ((*shell)->env)
 		free_matrix((*shell)->env);
+	if ((*shell)->arg)
+		free_matrix((*shell)->arg);
 	free((* shell));
 }
 
@@ -68,18 +71,20 @@ int main(int ac, char **ag, char **env)
 		error_message("Enter only one argument", CLOSE);
 	shell = NULL;
 	init_shell(&shell, env);
+	check_signal(signal_received);
 	while (1)
 	{
 		shell->prompt = readline(BLUE"/home/minishell$ "GBD);
 		if (!shell->prompt)
-			break;
+		{
+			printf("exit\n");
+			break ;
+		}
 		if (start_shell(shell) == -1)
 			error_message("Write a double \" o \'", NO_CLOSE);
-		//check_signal(signal_received);
-		if (!strncmp("exit", shell->prompt, 5))
-			break;
-		else
-			add_history(shell->prompt);
+		if (built_ins(shell) == -1)
+			break ;
+		add_history(shell->prompt);
 		free(shell->prompt);
 	}
 	clean_data(&shell);

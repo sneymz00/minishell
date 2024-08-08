@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:30:01 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/07 17:50:29 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/08 00:24:13 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_shell
 	int		token;
 	int		status;
 	char	*prompt;
+	char	**arg;
 	char	**env;
 }			t_shell;
 
@@ -80,5 +81,14 @@ int		start_shell(t_shell	*shell);
 /****ERORR FOUND***/
 void	error_message(char *str, t_opcode OPCODE);
 void	free_matrix(char **matrix);
+
+/***SIGNAL***/
+void	check_signal(int signal_received);
+void	handle_sigint(int signal);
+//void	handle_sigquit(int signal); quitar
+
+/***BUILTS_INS***/
+void	print_env(t_shell *shell);
+int		built_ins(t_shell *shell);
 
 #endif
