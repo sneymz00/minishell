@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 06:31:25 by camurill          #+#    #+#             */
-/*   Updated: 2024/01/20 13:41:25 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:08:45 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 size_t	ft_strlen(const char *s)
 {
+	if (!s)
+		return (0);
 	int	i;
 
 	i = 0;

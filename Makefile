@@ -29,6 +29,7 @@ SRC 		= 		$(SRC_DIR_SNY)main.c\
 					$(SRC_DIR_SNY)get_env.c\
 					$(SRC_DIR_SNY)signal.c\
 					$(SRC_DIR_SNY)built_ins.c\
+					$(SRC_DIR_SNY)built_ins_aux.c\
 
 
 ###############################################################################

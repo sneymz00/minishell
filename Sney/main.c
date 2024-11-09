@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:49:47 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/08 01:10:26 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/09 21:00:47 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_shell(t_shell **shell, char **env)
 	(* shell)->status = 0;
 	(* shell)->arg = NULL;
 	(* shell)->env = NULL;
+	(* shell)->aux_env = NULL;
 	get_env(shell, env);//toDo funtion clean malloc **
 }
 
@@ -45,9 +46,13 @@ void	clean_data(t_shell **shell)
 	}
 	if ((*shell)->env)
 		free_matrix((*shell)->env);
+
 	if ((*shell)->arg)
 		free_matrix((*shell)->arg);
+	if ((* shell)->aux_env)
+		free_matrix((*shell)->aux_env);
 	free((* shell));
+
 }
 
 void	free_matrix(char **matrix)
@@ -55,12 +60,15 @@ void	free_matrix(char **matrix)
 	size_t	i;
 
 	i = 0;
+	if (!matrix || !(*matrix))
+		return ;
 	while(matrix[i])
 	{
 		free(matrix[i]);
 		i++;
 	}
 	free(matrix);
+	matrix = NULL;
 }
 
 int main(int ac, char **ag, char **env)

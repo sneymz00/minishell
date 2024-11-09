@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:30:01 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/08 14:41:02 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/08/09 20:47:03 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # include <curses.h> //tgetent-tputs
 # include <term.h> //tgoto-tgetent
 # include "../Libreries/Libft/libft.h"
-
-#define DELIM		 " \t\r\n\a"
 
 /***COLORS***/
 # define GBD	     "\033[0m"
@@ -58,13 +56,6 @@ typedef enum e_opcode
 	OPEN,
 }	t_opcode;
 
-typedef struct s_list 
-{
-	char	*path;
-	struct s_list	*next;
-	struct s_list	*prev;
-}			t_list;		
-
 
 typedef struct s_shell
 {
@@ -73,6 +64,7 @@ typedef struct s_shell
 	char	*prompt;
 	char	**arg;
 	char	**env;
+	char	**aux_env;
 }			t_shell;
 
 /***FUNTIONS***/
@@ -80,6 +72,7 @@ int		check_doubles(char *str, char ltr);
 int		check_specials(char *str, char ltr);
 int		parssing(t_shell **shell);
 void	get_env(t_shell **shell, char **env);
+void	get_less_env(t_shell *shell, char *cmp);
 //void	prints(void);
 
 /***MAIN***/
@@ -97,6 +90,11 @@ void	handle_sigint(int signal);
 //void	handle_sigquit(int signal); quitar
 
 /***BUILTS_INS***/
+void	unset_shell(t_shell *shell, char *arg);
+void	get_echo(t_shell *shell);
+void	get_export(t_shell *shell);
+void	get_pwd();
+void	get_cd(t_shell *shell);
 void	print_env(t_shell *shell);
 int		built_ins(t_shell *shell);
 

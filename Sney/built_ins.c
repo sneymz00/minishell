@@ -6,30 +6,22 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 00:08:20 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/08 02:09:43 by camurill         ###   ########.fr       */
+/*   Updated: 2024/08/09 20:07:23 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int m_comprobation(t_shell *shell, int args)
-{
-	int		i;
-
-	i = 0;
-	while (shell->arg[i])
-	{
-		if (args < i)
-			return (1);
-		i++;
-	}
-	return (0);
-}
 void	print_env(t_shell *shell)
 {
 	size_t	i;
 
 	i = 0;
+	if (shell->arg[1])
+	{
+		printf(RED"env: ’%s’ No such file or directory\n"GBD, shell->arg[1]);
+		return ;
+	}
 	while (shell->env[i])
 	{
 		printf("%s\n", shell->env[i]);
@@ -47,49 +39,46 @@ void	get_pwd()
 		perror("pwd");
 }
 
+void	get_cd(t_shell *shell)
+{
+	if (shell->arg[1] == NULL)
+	{
+		error_message("Need a relative or absolute path\n", NO_CLOSE);
+		return ;
+	}
+	else if (shell->arg[1])
+	{
+		if (chdir(shell->arg[1]) != 0)
+		{
+			perror("cd");
+			return ;
+		}
+	}
+	else
+	{
+		error_message("Too many arguments\n", NO_CLOSE);
+		return ;
+	}
+}
+
 void	get_export(t_shell *shell)
 {
 	size_t	i;
 
 	i = 0;
-	while (shell->env[i])
+	if (shell->arg[1])
 	{
-		printf("declare -x %s\n", shell->env[i]);
-		i++;
+		while(shell->arg[i])
+			i++;
+		if (check_specials(shell->arg[1], '=') == 1)
+			shell->env[i] = ft_strdup(shell->arg[1]);
 	}
-}
-
-void	unset_shell(t_shell *shell, char *arg)
-{
-	size_t i;
-
-	//cubrir las flags
-	i = 0;
-	while (shell->env[i])
+	else
 	{
-		if (!ft_strncmp(shell->arg[1], shell->env[0], sizeof(arg)))//Hasta que llegue a =
+		while (shell->env[i])
 		{
-			if (unsetenv(shell->env[i]) != 0)
-				perror("unset");
+			printf("declare -x %s\n", shell->env[i]);
+			i++;
 		}
-		i++;
 	}
-}
-
-int	built_ins(t_shell *shell) //corregir errores
-{
-	if (!strncmp("exit", shell->arg[0], 5) && !m_comprobation(shell, 0))
-		{
-			printf("exit\n");
-			return (-1);
-		}
-	if (!strncmp("env", shell->arg[0], 4) && !m_comprobation(shell, 0))
-		print_env(shell);
-	if (!strncmp("pwd", shell->arg[0], 4) && !m_comprobation(shell, 0))
-		get_pwd();
-	if (!strncmp("export", shell->arg[0], 7) && !m_comprobation(shell, 0))
-		get_export(shell);
-	if (!strncmp("unset", shell->arg[0], 7) && !m_comprobation(shell, 0))
-		unset_shell(shell, shell->arg[1]);
-	return (0);
 }
