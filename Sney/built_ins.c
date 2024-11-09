@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 00:08:20 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/09 20:07:23 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:08:24 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_env(t_shell *shell)
 	}
 }
 
-void	get_pwd()
+void	get_pwd(void)
 {
 	char	cwd[1024];
 
@@ -68,7 +68,7 @@ void	get_export(t_shell *shell)
 	i = 0;
 	if (shell->arg[1])
 	{
-		while(shell->arg[i])
+		while (shell->arg[i])
 			i++;
 		if (check_specials(shell->arg[1], '=') == 1)
 			shell->env[i] = ft_strdup(shell->arg[1]);

@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:30:01 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/09 20:47:03 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:07:08 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define BOLD_CYAN   "\033[1m\033[36m"
 # define BOLD_WHITE  "\033[1m\033[37m"
 
-extern volatile sig_atomic_t signal_received;
+extern volatile sig_atomic_t	g_signal_received;
 
 typedef enum e_opcode
 {
@@ -56,6 +56,13 @@ typedef enum e_opcode
 	OPEN,
 }	t_opcode;
 
+typedef struct s_token
+{
+	char			*content;
+	int				type;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_token;
 
 typedef struct s_shell
 {
@@ -64,7 +71,8 @@ typedef struct s_shell
 	char	*prompt;
 	char	**arg;
 	char	**env;
-	char	**aux_env;
+	char	**aux_env; //quitar
+	t_token	eco_token;
 }			t_shell;
 
 /***FUNTIONS***/
@@ -93,7 +101,7 @@ void	handle_sigint(int signal);
 void	unset_shell(t_shell *shell, char *arg);
 void	get_echo(t_shell *shell);
 void	get_export(t_shell *shell);
-void	get_pwd();
+void	get_pwd(void);
 void	get_cd(t_shell *shell);
 void	print_env(t_shell *shell);
 int		built_ins(t_shell *shell);

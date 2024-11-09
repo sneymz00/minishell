@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:43:52 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/09 21:00:22 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:10:15 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ void	get_env(t_shell **shell, char **env)
 		return ;
 	while (env[i])
 		i++;
-	(* shell)->env	= malloc(sizeof(char **) * (i + 1));
-	if(!(*shell)->env)
+	(*shell)->env = malloc(sizeof(char **) * (i + 1));
+	if (!(*shell)->env)
 		error_message("Malloc", CLOSE);
-	(* shell)->aux_env	= malloc(sizeof(char **) * (i + 1));
-	if(!(*shell)->aux_env)
+	(*shell)->aux_env = malloc(sizeof(char **) * (i + 1));
+	if (!(*shell)->aux_env)
 		error_message("Malloc", CLOSE);
 	i = 0;
 	while (env[i])
 	{
-		(* shell)->aux_env[i] = ft_strdup(env[i]);
-		(* shell)->env[i] = ft_strdup(env[i]);
+		(*shell)->aux_env[i] = ft_strdup(env[i]);
+		(*shell)->env[i] = ft_strdup(env[i]);
 		i++;
 	}
 	(*shell)->env[i] = NULL;

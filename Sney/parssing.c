@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:35:51 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/08 18:47:38 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:14:08 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_doubles(char *str, char ltr)
 {
 	int	i;
-	int counter;
+	int	counter;
 
 	i = 0;
 	counter = 0;
@@ -50,11 +50,9 @@ int	check_specials(char *str, char ltr)
 
 int	parssing(t_shell **shell)
 {
-	if (check_doubles((*shell)->prompt, 34)) // ""
+	if (check_doubles((*shell)->prompt, 34))
 		return (-1);
-	if (check_doubles((*shell)->prompt, 39)) // ''
+	if (check_doubles((*shell)->prompt, 39))
 		return (-1);
-	//if (check_specials(cmd->prompt, 47) || check_specials(cmd->prompt, 59))//:/ Cambiar a caso especifico
-	//	return (-1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 12:50:29 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/09 20:55:10 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:16:27 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ void	unset_shell(t_shell *shell, char *arg)
 			return ;
 		if (!ft_strncmp(shell->env[i], aux, ft_strlen(aux)))
 		{
-			//get_less_env(shell, aux);
 			free(aux);
-			break;
+			break ;
 		}
 		free(aux);
 		i++;
@@ -77,23 +76,23 @@ int	built_ins(t_shell *shell) //corregir errores
 	if (!shell->arg[0] || shell->arg[0] == "\0")
 		return (0);
 	if (!strncmp("exit", shell->arg[0], 5))
+	{
+		printf(YELLOW"exit\n"GBD);
+		if (shell->arg[1])
 		{
-			printf(YELLOW"exit\n"GBD);
-			if (shell->arg[1])
-			{
-				printf("minishell: exit: %s: ", shell->arg[1]);
-				printf("numeric argument required\n");
-			}
-			return (-1);
+			printf("minishell: exit: %s: ", shell->arg[1]);
+			printf("numeric argument required\n");
 		}
+		return (-1);
+	}
 	if (!strncmp("env", shell->arg[0], 4))
 		print_env(shell);
 	if (!strncmp("pwd", shell->arg[0], 4))
 		get_pwd();
 	if (!strncmp("export", shell->arg[0], 7))
 		get_export(shell);
-	//if (!strncmp("unset", shell->arg[0], 7))
-	//	unset_shell(shell, shell->arg[1]);
+	if (!strncmp("unset", shell->arg[0], 7))
+		unset_shell(shell, shell->arg[1]);
 	if (!strncmp("cd", shell->arg[0], 3))
 		get_cd(shell);
 	if (!strncmp("echo", shell->arg[0], 5))

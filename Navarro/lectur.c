@@ -6,14 +6,14 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:54:07 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/06 19:33:04 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:03:47 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-char	*	token(char *s, int i)
+char	*token(char *s, int i)
 {
 	int j;
 	char *new_token
