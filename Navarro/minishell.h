@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:25:14 by joanavar          #+#    #+#             */
-/*   Updated: 2024/10/30 10:59:00 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:38:05 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -48,9 +48,9 @@
 # define BOLD_WHITE  "\033[1m\033[37m"
 
 # define SPACES		0 // 0 = ESPACIOS
-# define STRING		1 // 1 = STRING SIN COMILLAS
-# define STRINGCS	2 // 2 = STRING CON COMILLAS SIMPLES
-# define STRINGCD	3 // 3 = STRING CON COMILLAS DOBLES
+# define STRING 	1  // 1 = STRING SIN COMILLAS
+//# define STRINGCS	2 // 2 = STRING CON COMILLAS SIMPLES
+//# define STRINGCD	3 // 3 = STRING CON COMILLAS DOBLES
 # define PIPE 		4 //  = PIPE |
 # define HDOC		5 //  = HEREDOC <<
 # define REDIROUT	6 //  = REDIRECCION >

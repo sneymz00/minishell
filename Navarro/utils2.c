@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:42:41 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/09 12:37:58 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:38:14 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_quotes(char *str, int i, char **stack)
 	int j;
 	int count;
 
-	j = i;
+	j = i + 1;
 	count = 0;
 	while (str[j] != "'" || str[j] != 4)
 	{
