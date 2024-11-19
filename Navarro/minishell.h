@@ -6,10 +6,11 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:25:14 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/12 16:38:05 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:17:02 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include <stdio.h> //printf-perror
 # include <stdlib.h> //malloc-free-getenv
@@ -70,3 +71,17 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
+
+
+
+//lectur.c
+void	lectur_imput(char *str);
+
+//utils.c
+void	get_token(char *str, t_token **stack);
+//utils2.c
+int		is_string(char *str, int i, t_token **stack);
+//remove_quotes.c
+void	remove_quotes(t_token *stack);
+
+#endif

@@ -1,15 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/19 18:16:05 by joanavar          #+#    #+#             */
+/*   Updated: 2024/11/19 18:23:25 by joanavar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	get_token(char *str, t_token **stack)
+static t_token	*find_last(t_token *stack)
 {
-	t_token *token;
-	
-	token->content = str;
-	//get_type_token(token);
-	stack_token(token, stack);
-
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
 }
-void	get_type_token(token)
+
+static void	stack_token(t_token *token, t_token **stack)
+{
+	t_token *last_token;
+
+	if (!(*stack))
+	{
+		*stack = token;
+		token->next = NULL;
+		return ;
+	}
+	last_token = find_last(*stack);
+	last_token->next = token;
+	token->prev = last_token;
+}
+static void	get_type_token(t_token *token)
 {
 	if (ft_strcmp(token->content, " ") == 0)
 		token->type = 0;
@@ -27,54 +51,16 @@ void	get_type_token(token)
 		token->type = 1;
 }
 
-void    is_caracter_token(char c, t_token **stack)
+void	get_token(char *str, t_token **stack)
 {
-    char *token;
+	t_token *token;
+	
+	token->content = str;
+	//get_type_token(token);
+	stack_token(token, stack);
 
-    token = malloc(sizeof(char *) * 2);
-	if (!token)
-		return ;
-    token[0] = c;
-    token[1] = '\0';
-    get_token(token, stack);
 }
 
-void    is_redireccion(char *str, int i, t_token **stack)
-{
-    char *token;
-    int j;
 
-    j = 0;
-    token = malloc(sizeof(char *) * 3);
-    while (str[i] = '<' || str[i])
-    {
-        token[j] = str[i];
-        j++;
-        i++;
-    }
-    token[j] = '\0';
 
-    get_token(token, stack);
-}
 
-int    is_word(char *str, int i, t_token **stack)
-{
-    char *token;
-    int j;
-    int count;
-
-    j = i;
-    count = 0;
-    while (!is_command(str[j]))
-    {
-        count++;
-        j++;
-    }
-    j = 0;
-    token = malloc(sizeof(char *) * (count + 1));
-    while (!is_command(str[j]))
-        token[j++] = str[i++];
-    Token[j] = '\0';
-    get_token(token, stack);
-	return (i--);
-}
