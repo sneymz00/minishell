@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   string.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 18:42:41 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/19 18:35:36 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:03:30 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int is_command(char c)
 	return (0);
 }
 
-static int	is_quotes(char *str, int i, t_token **stack)
+static int	is_quotes(char *str, int i, t_token *stack)
 {
 	char *token;
 	int j;
@@ -51,7 +51,7 @@ static int	is_quotes(char *str, int i, t_token **stack)
 	return (i);
 }
 
-static int    is_word(char *str, int i, t_token **stack)
+static int    is_word(char *str, int i, t_token *stack)
 {
     char *token;
     int j;
@@ -73,7 +73,7 @@ static int    is_word(char *str, int i, t_token **stack)
 	return (i--);
 }
 
-int is_string(char *str, int i, t_token **stack)
+int is_string(char *str, int i, t_token *stack)
 {
 	int j;
 

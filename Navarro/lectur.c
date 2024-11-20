@@ -6,13 +6,13 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:54:07 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/19 18:21:16 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:07:53 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void    is_caracter_token(char c, t_token **stack)
+static void    is_caracter_token(char c, t_token *stack)
 {
     char *token;
 
@@ -24,7 +24,7 @@ static void    is_caracter_token(char c, t_token **stack)
     get_token(token, stack);
 }
 
-static void    is_redireccion(char *str, int i, t_token **stack)
+static void    is_redireccion(char *str, int i, t_token *stack)
 {
     char *token;
     int j;
@@ -42,32 +42,10 @@ static void    is_redireccion(char *str, int i, t_token **stack)
     get_token(token, stack);
 }
 
-
-/*void	remove_quotes(t_token *stack)
-{
-	int i;
-	t_token *new_token;
-	t_token *tmp;
-	new_token->content = ft_strdup("");
-	while (stack->next)
-	{
-		if (string_type(stack))
-		{
-			new_token = stack;
-			while (string_type(stack))
-				stack = stack->next;
-			tmp = stack;
-			create_one_token(stack, new_token, )
-		}
-		stack = stack->next;
-	}
-}*/
-
-
 void	lectur_imput(char *str)
 {
 	int i = 0;
-	t_token **stack;
+	t_token *stack;
 
 	stack = NULL;
 	if (!str)
@@ -93,8 +71,8 @@ void	lectur_imput(char *str)
 			is_string(str, i, stack);
 		i++;
 	}
-	for (t_token *tmp = *stack; tmp; tmp = tmp->next)
-		printf("<%s>\n", tmp->content);
+	/*for (t_token *tmp = *stack; tmp; tmp = tmp->next)
+		printf("<%s>\n", tmp->content);*/
 	//remove_quotes(*stack);
 }
 

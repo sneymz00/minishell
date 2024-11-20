@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:25:14 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/19 18:17:02 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:07:13 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -50,8 +50,8 @@
 
 # define SPACES		0 // 0 = ESPACIOS
 # define STRING 	1  // 1 = STRING SIN COMILLAS
-//# define STRINGCS	2 // 2 = STRING CON COMILLAS SIMPLES
-//# define STRINGCD	3 // 3 = STRING CON COMILLAS DOBLES
+# define STRINGCS	2 // 2 = STRING CON COMILLAS SIMPLES
+# define STRINGCD	3 // 3 = STRING CON COMILLAS DOBLES
 # define PIPE 		4 //  = PIPE |
 # define HDOC		5 //  = HEREDOC <<
 # define REDIROUT	6 //  = REDIRECCION >
@@ -77,11 +77,13 @@ typedef struct s_token
 //lectur.c
 void	lectur_imput(char *str);
 
-//utils.c
-void	get_token(char *str, t_token **stack);
-//utils2.c
-int		is_string(char *str, int i, t_token **stack);
+//token.c
+void	get_token(char *str, t_token *stack);
+//string.c
+int		is_string(char *str, int i, t_token *stack);
 //remove_quotes.c
 void	remove_quotes(t_token *stack);
+//utils.c
+int		ft_strcmp(const char *src, char *s);
 
 #endif
