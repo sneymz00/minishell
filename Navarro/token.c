@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:16:05 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/21 18:02:15 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:38:34 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static t_token	*find_last(t_token *stack)
 {
 	while (stack->next)
+	{
 		stack = stack->next;
+	}
 	return (stack);
 }
 
@@ -26,6 +28,7 @@ static void	stack_token(t_token *token, t_token **stack)
 	last_token = find_last(*stack);
 	last_token->next = token;
 	token->prev = last_token;
+	token->next = NULL;
 }
 static void	get_type_token(t_token *token)
 {

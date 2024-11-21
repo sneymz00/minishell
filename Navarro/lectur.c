@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:54:07 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/21 18:42:53 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:38:54 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,13 @@ void	lectur_imput(char *str)
 
 int main(/*int argc, char **argv*/)
 {
-	//char *c = readline("prueba>");
-	lectur_imput("'e'\"c\"'h''o' hola");
+	char *c;
+	//lectur_imput("'e' |ls>cat -e");
 	//(void)argc;
-	//lectur_imput(argv[1]);
+	while (1)
+	{
+		c = readline("prueba>");
+		lectur_imput(c);
+	}
+	return (0);
 }
