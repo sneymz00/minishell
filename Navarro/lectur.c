@@ -6,13 +6,15 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:54:07 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/20 19:07:53 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:42:53 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <readline/readline.h>
+#include <readline/history.h>
 #include "minishell.h"
 
-static void    is_caracter_token(char c, t_token *stack)
+static void    is_caracter_token(char c, t_token **stack)
 {
     char *token;
 
@@ -24,7 +26,7 @@ static void    is_caracter_token(char c, t_token *stack)
     get_token(token, stack);
 }
 
-static void    is_redireccion(char *str, int i, t_token *stack)
+static void    is_redireccion(char *str, int i, t_token **stack)
 {
     char *token;
     int j;
@@ -53,22 +55,25 @@ void	lectur_imput(char *str)
 	while (str[i])
 	{
 		if (str[i] == ' ')
-			is_caracter_token(str[i], stack);
+			is_caracter_token(str[i], &stack);
 		else if (str[i] == '|')
-			is_caracter_token(str[i], stack);
-		else if (str[i] == '>' && str[i] == '<')
+			is_caracter_token(str[i], &stack);
+		else if (str[i] == '>' || str[i] == '<')
 		{
 			 if ((str[i] == '<' && str[i + 1] == '<') ||
 				str[i] == '>' && str[i + 1] == '>')
 				{
-					is_redireccion(str, i, stack);
+					is_redireccion(str, i, &stack);
 					i++;
 				}
 			 else
-				 is_caracter_token(str[i], stack);
+				 is_caracter_token(str[i], &stack);
 		}
-		else 
-			is_string(str, i, stack);
+		else
+		{
+			i = is_string(str, i, &stack);
+			i--;
+		}
 		i++;
 	}
 	/*for (t_token *tmp = *stack; tmp; tmp = tmp->next)
@@ -78,8 +83,10 @@ void	lectur_imput(char *str)
 
 
 
-int main(int argc, char **argv)
+int main(/*int argc, char **argv*/)
 {
-	(void)argc;
-	lectur_imput(argv[1]);
+	//char *c = readline("prueba>");
+	lectur_imput("'e'\"c\"'h''o' hola");
+	//(void)argc;
+	//lectur_imput(argv[1]);
 }

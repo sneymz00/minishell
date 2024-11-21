@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:25:14 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/20 19:07:13 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:52:55 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -78,12 +78,13 @@ typedef struct s_token
 void	lectur_imput(char *str);
 
 //token.c
-void	get_token(char *str, t_token *stack);
+void	get_token(char *str, t_token **stack);
 //string.c
-int		is_string(char *str, int i, t_token *stack);
+int		is_string(char *str, int i, t_token **stack);
 //remove_quotes.c
 void	remove_quotes(t_token *stack);
 //utils.c
 int		ft_strcmp(const char *src, char *s);
+void	print_token(t_token *stack);
 
 #endif
