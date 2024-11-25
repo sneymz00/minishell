@@ -6,13 +6,13 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 17:34:47 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/19 18:01:04 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:54:51 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
- static int	string_type(t_token *token)
+int	string_type(t_token *token)
 {
 	if (token->type == 1)
 		return (1);
@@ -24,7 +24,7 @@
 		return (0);
 }
 
-void	remove_quotes(t_token *stack)
+/*void	remove_quotes(t_token *stack)
 {
 	t_token *tmp;
 	char	*tmp_content;
@@ -44,4 +44,4 @@ void	remove_quotes(t_token *stack)
 		else
 			stack = stack->next;
 	}
-}
+}*/

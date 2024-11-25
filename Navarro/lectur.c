@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:54:07 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/21 19:38:54 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:56:50 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	lectur_imput(char *str)
 		}
 		i++;
 	}
+	if (!syntax_error(&stack))
+		return ;
 	/*for (t_token *tmp = *stack; tmp; tmp = tmp->next)
 		printf("<%s>\n", tmp->content);*/
 	//remove_quotes(*stack);

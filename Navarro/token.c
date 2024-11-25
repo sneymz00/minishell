@@ -6,18 +6,16 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:16:05 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/21 19:38:34 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:43:18 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_token	*find_last(t_token *stack)
+t_token	*find_last(t_token *stack)
 {
 	while (stack->next)
-	{
 		stack = stack->next;
-	}
 	return (stack);
 }
 
