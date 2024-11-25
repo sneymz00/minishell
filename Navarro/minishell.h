@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:25:14 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/25 17:50:56 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:32:30 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -90,5 +90,6 @@ int		ft_strcmp(const char *src, char *s);
 void	print_token(t_token *stack);
 //syntax_error.c
 int		syntax_error(t_token **stack);
+int		redir_type(t_token *token);
 
 #endif
