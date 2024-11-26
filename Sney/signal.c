@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 17:30:19 by camurill          #+#    #+#             */
-/*   Updated: 2024/11/09 14:14:45 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:27:37 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	handle_sigint(int signal)
 {
 	(void)signal;
-	signal_received = 1;
+	g_signal_received = 1;
 	rl_on_new_line();
 	printf("\n");
 	rl_replace_line("", 0);

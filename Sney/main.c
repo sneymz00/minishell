@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:49:47 by camurill          #+#    #+#             */
-/*   Updated: 2024/11/09 14:19:19 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:26:36 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -75,7 +75,7 @@ int	main(int ac, char **ag, char **env)
 		error_message("Enter only one argument", CLOSE);
 	shell = NULL;
 	init_shell(&shell, env);
-	check_signal(signal_received);
+	check_signal(g_signal_received);
 	while (1)
 	{
 		shell->prompt = readline(BLUE"/home/minishell$ "GBD);
