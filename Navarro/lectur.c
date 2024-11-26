@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lectur.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:54:07 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/25 17:56:50 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:13:15 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 static void    is_caracter_token(char c, t_token **stack)
 {
@@ -44,14 +44,14 @@ static void    is_redireccion(char *str, int i, t_token **stack)
     get_token(token, stack);
 }
 
-void	lectur_imput(char *str)
+t_token	*lectur_imput(char *str)
 {
 	int i = 0;
 	t_token *stack;
 
 	stack = NULL;
 	if (!str)
-		return ;
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == ' ')
@@ -76,8 +76,7 @@ void	lectur_imput(char *str)
 		}
 		i++;
 	}
-	if (!syntax_error(&stack))
-		return ;
+	return (stack);
 	/*for (t_token *tmp = *stack; tmp; tmp = tmp->next)
 		printf("<%s>\n", tmp->content);*/
 	//remove_quotes(*stack);
@@ -85,7 +84,7 @@ void	lectur_imput(char *str)
 
 
 
-int main(/*int argc, char **argv*/)
+/*int main(int argc, char **argv)
 {
 	char *c;
 	//lectur_imput("'e' |ls>cat -e");
@@ -96,4 +95,4 @@ int main(/*int argc, char **argv*/)
 		lectur_imput(c);
 	}
 	return (0);
-}
+}*/

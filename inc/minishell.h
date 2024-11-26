@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:30:01 by camurill          #+#    #+#             */
-/*   Updated: 2024/11/09 14:07:08 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:12:37 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,18 @@
 # define BOLD_CYAN   "\033[1m\033[36m"
 # define BOLD_WHITE  "\033[1m\033[37m"
 
+/***TOKENS***/
+# define SPACES		0 // 0 = ESPACIOS
+# define STRING 	1  // 1 = STRING SIN COMILLAS
+# define STRINGCS	2 // 2 = STRING CON COMILLAS SIMPLES
+# define STRINGCD	3 // 3 = STRING CON COMILLAS DOBLES
+# define PIPE 		4 //  = PIPE |
+# define HDOC		5 //  = HEREDOC <<
+# define REDIROUT	6 //  = REDIRECCION >
+# define APPEND		7 //  = APEND >>
+# define REDIRIN	8 //  = REDIRECCION <
+
+
 extern volatile sig_atomic_t	g_signal_received;
 
 typedef enum e_opcode
@@ -60,19 +72,19 @@ typedef struct s_token
 {
 	char			*content;
 	int				type;
+	//int				expanded;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
 
 typedef struct s_shell
 {
-	int		token;
 	int		status;
 	char	*prompt;
 	char	**arg;
 	char	**env;
 	char	**aux_env; //quitar
-	t_token	eco_token;
+	t_token	*eco_token;
 }			t_shell;
 
 /***FUNTIONS***/
@@ -80,7 +92,7 @@ int		check_doubles(char *str, char ltr);
 int		check_specials(char *str, char ltr);
 int		parssing(t_shell **shell);
 void	get_env(t_shell **shell, char **env);
-void	get_less_env(t_shell *shell, char *cmp);
+//void	get_less_env(t_shell *shell, char *cmp);
 //void	prints(void);
 
 /***MAIN***/
@@ -105,5 +117,18 @@ void	get_pwd(void);
 void	get_cd(t_shell *shell);
 void	print_env(t_shell *shell);
 int		built_ins(t_shell *shell);
+
+/***NAVARRO FUNTIONS***/
+//lectur.c
+t_token	*lectur_imput(char *str);
+//token.c
+void	get_token(char *str, t_token **stack);
+//string.c
+int		is_string(char *str, int i, t_token **stack);
+//remove_quotes.c
+void	remove_quotes(t_token *stack);
+//utils.c
+int		ft_strcmp(const char *src, char *s);
+void	print_token(t_token *stack);
 
 #endif

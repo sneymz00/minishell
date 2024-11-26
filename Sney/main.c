@@ -6,9 +6,14 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:49:47 by camurill          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/11/12 15:26:36 by joanavar         ###   ########.fr       */
+=======
+/*   Updated: 2024/11/22 14:12:57 by camurill         ###   ########.fr       */
+>>>>>>> 96e8de378d022532f78098e2fb99474219ee231b
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 volatile sig_atomic_t	g_signal_received = 0;
@@ -27,7 +32,6 @@ void	init_shell(t_shell **shell, char **env)
 	if (!shell || !(*shell))
 		error_message("Problems with mallocs", CLOSE);
 	(*shell)->prompt = NULL;
-	(*shell)->token = 0;
 	(*shell)->status = 0;
 	(*shell)->arg = NULL;
 	(*shell)->env = NULL;
@@ -79,15 +83,12 @@ int	main(int ac, char **ag, char **env)
 	while (1)
 	{
 		shell->prompt = readline(BLUE"/home/minishell$ "GBD);
-		if (!shell->prompt)
-		{
-			printf("exit\n");
+		if (!shell->prompt && printf("exit\n") > 0)
 			break ;
-		}
 		if (start_shell(shell) == -1)
 			error_message("Write a double \" o \'", NO_CLOSE);
-		if (built_ins(shell) == -1)
-			break ;
+		//if (built_ins(shell) == -1)
+		//	break ;
 		add_history(shell->prompt);
 		free(shell->prompt);
 	}

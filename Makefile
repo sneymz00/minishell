@@ -30,6 +30,11 @@ SRC 		= 		$(SRC_DIR_SNY)main.c\
 					$(SRC_DIR_SNY)signal.c\
 					$(SRC_DIR_SNY)built_ins.c\
 					$(SRC_DIR_SNY)built_ins_aux.c\
+					$(SRC_DIR_NAV)remove_quotes.c\
+					$(SRC_DIR_NAV)string.c\
+					$(SRC_DIR_NAV)token.c\
+					$(SRC_DIR_NAV)utils.c\
+					$(SRC_DIR_NAV)lectur.c
 
 
 ###############################################################################
