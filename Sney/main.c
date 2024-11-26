@@ -6,14 +6,12 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 18:49:47 by camurill          #+#    #+#             */
-/*   Updated: 2024/08/08 01:10:26 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:19:19 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../inc/minishell.h"
 
-# include "../inc/minishell.h"
-
-volatile sig_atomic_t signal_received = 0;
-
+volatile sig_atomic_t	g_signal_received = 0;
 
 void	error_message(char *str, t_opcode OPCODE)
 {
@@ -21,24 +19,25 @@ void	error_message(char *str, t_opcode OPCODE)
 		printf(RED"Error found: %s\n"GBD, str);
 	if (OPCODE == CLOSE)
 		exit(1);
-}	
+}
 
 void	init_shell(t_shell **shell, char **env)
 {
-	(* shell) = malloc(sizeof(t_shell));
-	if (!shell || !(* shell))
+	(*shell) = malloc(sizeof(t_shell));
+	if (!shell || !(*shell))
 		error_message("Problems with mallocs", CLOSE);
-	(* shell)->prompt = NULL;
-	(* shell)->token = 0;
-	(* shell)->status = 0;
-	(* shell)->arg = NULL;
-	(* shell)->env = NULL;
-	get_env(shell, env);//toDo funtion clean malloc **
+	(*shell)->prompt = NULL;
+	(*shell)->token = 0;
+	(*shell)->status = 0;
+	(*shell)->arg = NULL;
+	(*shell)->env = NULL;
+	(*shell)->aux_env = NULL;
+	get_env(shell, env);//toD
 }
 
 void	clean_data(t_shell **shell)
 {
-	if ((* shell)->prompt)
+	if ((*shell)->prompt)
 	{
 		free((*shell)->prompt);
 		(*shell)->prompt = NULL;
@@ -47,7 +46,9 @@ void	clean_data(t_shell **shell)
 		free_matrix((*shell)->env);
 	if ((*shell)->arg)
 		free_matrix((*shell)->arg);
-	free((* shell));
+	if ((*shell)->aux_env)
+		free_matrix((*shell)->aux_env);
+	free((*shell));
 }
 
 void	free_matrix(char **matrix)
@@ -55,15 +56,18 @@ void	free_matrix(char **matrix)
 	size_t	i;
 
 	i = 0;
-	while(matrix[i])
+	if (!matrix || !(*matrix))
+		return ;
+	while (matrix[i])
 	{
 		free(matrix[i]);
 		i++;
 	}
 	free(matrix);
+	matrix = NULL;
 }
 
-int main(int ac, char **ag, char **env)
+int	main(int ac, char **ag, char **env)
 {
 	t_shell	*shell;
 

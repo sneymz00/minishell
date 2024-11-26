@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 18:30:01 by camurill          #+#    #+#             */
-/*   Updated: 2024/11/09 14:07:08 by camurill         ###   ########.fr       */
+/*   Created: 2024/10/29 17:25:14 by joanavar          #+#    #+#             */
+/*   Updated: 2024/11/25 19:32:30 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -28,8 +27,10 @@
 # include <term.h> //tgoto-tgetent
 # include "../Libreries/Libft/libft.h"
 
+#define DELIM		" \t\r\n\a"
+
 /***COLORS***/
-# define GBD	     "\033[0m"
+# define GBD	    "\033[0m"
 # define BLACK       "\033[30m"
 # define RED         "\033[31m"
 # define GREEN       "\033[32m"
@@ -47,63 +48,48 @@
 # define BOLD_CYAN   "\033[1m\033[36m"
 # define BOLD_WHITE  "\033[1m\033[37m"
 
-extern volatile sig_atomic_t	g_signal_received;
+# define SPACES		0 // 0 = ESPACIOS
+# define STRING 	1  // 1 = STRING SIN COMILLAS
+# define STRINGCS	2 // 2 = STRING CON COMILLAS SIMPLES
+# define STRINGCD	3 // 3 = STRING CON COMILLAS DOBLES
+# define PIPE 		4 //  = PIPE |
+# define HDOC		5 //  = HEREDOC <<
+# define REDIROUT	6 //  = REDIRECCION >
+# define APPEND		7 //  = APEND >>
+# define REDIRIN	8 //  = REDIRECCION <
+//# define DOLLAR		9 //  = $
+/*	STRUCTS		*/
+/*	struct with tokens	*/
 
-typedef enum e_opcode
-{
-	CLOSE,
-	NO_CLOSE,
-	OPEN,
-}	t_opcode;
+extern volatile sig_atomic_t signal_received;
 
 typedef struct s_token
 {
 	char			*content;
 	int				type;
+	//int				expanded;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
 
-typedef struct s_shell
-{
-	int		token;
-	int		status;
-	char	*prompt;
-	char	**arg;
-	char	**env;
-	char	**aux_env; //quitar
-	t_token	eco_token;
-}			t_shell;
 
-/***FUNTIONS***/
-int		check_doubles(char *str, char ltr);
-int		check_specials(char *str, char ltr);
-int		parssing(t_shell **shell);
-void	get_env(t_shell **shell, char **env);
-void	get_less_env(t_shell *shell, char *cmp);
-//void	prints(void);
 
-/***MAIN***/
-void	init_shell(t_shell **shell, char **env);
-void	clean_data(t_shell **shell);
-int		start_shell(t_shell	*shell);
+//lectur.c
+void	lectur_imput(char *str);
 
-/****ERORR FOUND***/
-void	error_message(char *str, t_opcode OPCODE);
-void	free_matrix(char **matrix);
-
-/***SIGNAL***/
-void	check_signal(int signal_received);
-void	handle_sigint(int signal);
-//void	handle_sigquit(int signal); quitar
-
-/***BUILTS_INS***/
-void	unset_shell(t_shell *shell, char *arg);
-void	get_echo(t_shell *shell);
-void	get_export(t_shell *shell);
-void	get_pwd(void);
-void	get_cd(t_shell *shell);
-void	print_env(t_shell *shell);
-int		built_ins(t_shell *shell);
+//token.c
+void	get_token(char *str, t_token **stack);
+t_token	*find_last(t_token *stack);
+//string.c
+int		is_string(char *str, int i, t_token **stack);
+//remove_quotes.c
+void	remove_quotes(t_token *stack);
+int		string_type(t_token *token);
+//utils.c
+int		ft_strcmp(const char *src, char *s);
+void	print_token(t_token *stack);
+//syntax_error.c
+int		syntax_error(t_token **stack);
+int		redir_type(t_token *token);
 
 #endif
