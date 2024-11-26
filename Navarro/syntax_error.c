@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:34:15 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/25 19:53:08 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:05:02 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,19 @@ int	redir_type(t_token *token)
 }
 static int syntax_pipe_or_redi(t_token *token)
 {
-	/*if (token->type == 4 && !(token->next->type = 4))
-		return (0);*/ // MIrar porque da segmentesion fault;
-	else if (redir_type(token) && !redir_type(token->next))
-		return (0);
-	else 
+	printf("%d\n", token->next->type);
+	if (token->type == 4 && (token->next->type = 4))
+	{
+		printf("Error syntax pipe\n");
 		return (1);
+	}// MIrar porque da segmentesion fault;
+	else if (redir_type(token) && !redir_type(token->next))
+	{
+		printf("Error syntax redi\n");
+		return (1);
+	}
+	else 
+		return (0);
 }
 
 int	syntax_error(t_token **stack)
@@ -49,10 +56,10 @@ int	syntax_error(t_token **stack)
 	tmp = *stack;
 	while (tmp)
 	{
-		if (!syntax_pipe_or_redi(tmp))
+		if ((tmp->type == 4 || redir_type(tmp)))
 		{
-			printf("error syntax pipe or redi\n");
-			return (0);
+			if(syntax_pipe_or_redi(tmp))
+				return (0);
 		}
 		tmp = tmp->next;
 	}
