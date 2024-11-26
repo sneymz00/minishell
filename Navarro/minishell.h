@@ -6,7 +6,7 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:25:14 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/22 13:28:53 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:12:23 by camurill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,17 @@ void	lectur_imput(char *str);
 
 //token.c
 void	get_token(char *str, t_token **stack);
+t_token	*find_last(t_token *stack);
 //string.c
 int		is_string(char *str, int i, t_token **stack);
 //remove_quotes.c
 void	remove_quotes(t_token *stack);
+int		string_type(t_token *token);
 //utils.c
 int		ft_strcmp(const char *src, char *s);
 void	print_token(t_token *stack);
+//syntax_error.c
+int		syntax_error(t_token **stack);
+int		redir_type(t_token *token);
 
 #endif
