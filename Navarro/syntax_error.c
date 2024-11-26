@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:34:15 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/26 13:05:02 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:18:09 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,32 @@ int	redir_type(t_token *token)
 		return (0);
 
 }
+
+static int	syntax_pipe(t_token *token)
+{
+	if (token->type == 4 && (token->next->type == 4))
+	{
+		printf("Error Syntax pipe\n");
+		return (0);
+	}
+	else if (token->type == 4 && (token->next->type == 0))
+	{
+		token = token->next;
+		while(token->type == 0)
+			token = token->next;
+		if (token->type == 4)
+		{
+			printf("Error Syntax pipe\n");
+			return (0);
+		}
+	} 
+	return (1);
+}
 static int syntax_pipe_or_redi(t_token *token)
 {
-	printf("%d\n", token->next->type);
-	if (token->type == 4 && (token->next->type = 4))
-	{
-		printf("Error syntax pipe\n");
+	if (syntax_pipe(token))
 		return (1);
-	}// MIrar porque da segmentesion fault;
-	else if (redir_type(token) && !redir_type(token->next))
+	else if (redir_type(token) && redir_type(token->next))
 	{
 		printf("Error syntax redi\n");
 		return (1);
