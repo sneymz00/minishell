@@ -6,13 +6,14 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:54:07 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/26 16:13:15 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:10:14 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "../inc/minishell.h"
+//#include "../inc/minishell.h"
+#include "paquito.h"
 
 static void    is_caracter_token(char c, t_token **stack)
 {
@@ -29,18 +30,20 @@ static void    is_caracter_token(char c, t_token **stack)
 static void    is_redireccion(char *str, int i, t_token **stack)
 {
     char *token;
-    int j;
 
-    j = 0;
     token = malloc(sizeof(char *) * 3);
-    while (str[i] == '<' || str[i] == '>') // proteger si te mandan >< o <>;
-    {
-        token[j] = str[i];
-        j++;
-        i++;
-    }
-    token[j] = '\0';
+	if (str[i] == '<' && str[i + 1] == '<')
+	{
+		token[0] = '<';
+		token[1] = '<';
+	}
+	else if (str[i] == '>' && str[i + 1] == '>')
+	{
+		token[0] = '<';
+		token[1] = '<';
 
+	}
+    token[2] = '\0';
     get_token(token, stack);
 }
 
@@ -76,6 +79,8 @@ t_token	*lectur_imput(char *str)
 		}
 		i++;
 	}
+	if (syntax_error(&stack))
+		return NULL;
 	return (stack);
 	/*for (t_token *tmp = *stack; tmp; tmp = tmp->next)
 		printf("<%s>\n", tmp->content);*/
@@ -84,7 +89,7 @@ t_token	*lectur_imput(char *str)
 
 
 
-/*int main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	char *c;
 	//lectur_imput("'e' |ls>cat -e");
@@ -95,4 +100,4 @@ t_token	*lectur_imput(char *str)
 		lectur_imput(c);
 	}
 	return (0);
-}*/
+}

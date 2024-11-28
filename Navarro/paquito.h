@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   paquito.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:25:14 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/26 16:12:23 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:43:42 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-# define MINISHELL_H
+#ifndef PAQUITO_H
+# define PAQUITO_H
 
 # include <stdio.h> //printf-perror
 # include <stdlib.h> //malloc-free-getenv
@@ -75,7 +75,7 @@ typedef struct s_token
 
 
 //lectur.c
-void	lectur_imput(char *str);
+t_token	*lectur_imput(char *str);
 
 //token.c
 void	get_token(char *str, t_token **stack);

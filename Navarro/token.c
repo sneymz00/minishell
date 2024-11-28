@@ -6,11 +6,12 @@
 /*   By: camurill <camurill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 18:16:05 by joanavar          #+#    #+#             */
-/*   Updated: 2024/11/26 16:12:39 by camurill         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:41:44 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+//#include "../inc/minishell.h"
+#include "paquito.h"
 
 t_token	*find_last(t_token *stack)
 {
